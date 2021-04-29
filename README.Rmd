@@ -4,12 +4,13 @@ output: github_document
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-```{r, include=FALSE}
+```{r message=FALSE, include=FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/README-",
-  out.width = "100%"
+  #out.width = "100%" # Stretching some figures out to 100% makes them look bad
+  fig.width = 6, fig.height = 4, dpi = 200
 )
 
 extrafont::loadfonts(device = "win")
@@ -20,8 +21,7 @@ extrafont::loadfonts(device = "win")
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of `dunnr` is to compile various helper functions and lists that I frequently use.
-Mostly, it has functions for plotting in `ggplot2`.
+The goal of `dunnr` is to compile various helper functions, templates, and lists that I frequently use.
 
 ## Installation
 
@@ -33,7 +33,7 @@ remotes::install_github("taylordunn/dunnr")
 
 ### Plotting functions
 
-My go-to theme can be applied with `theme_td()`:
+My go-to `ggplot2` theme can be applied with `theme_td()`:
 
 ```{r example_theme_td}
 library(dunnr)
@@ -66,9 +66,26 @@ extrafont::loadfonts(device = "win")
 
 Alternatively, give another font as an argument, e.g. `theme_td(base_family = "Arial")`.
 
+### `remove_axis()`
+
+A common tweak I make to plots is to remove unnecessary axes.
+The `remove_axis()` function saves a few lines of code:
+
+```{r example_remove_axis}
+p <- penguins %>%
+  filter(!is.na(flipper_length_mm)) %>%
+  ggplot(aes(x = flipper_length_mm)) +
+  geom_density(aes(fill = species), alpha = 0.5) +
+  scale_fill_brewer(palette = "Set1") +
+  scale_y_continuous(expand = expansion(c(0, 0.1))) +
+  labs(x = "Flipper length (mm)")
+p + theme_td() +
+  remove_axis("y")
+```
+
 ### `add_facet_border()`
 
-Sometimes when plotting facets like above, it helps to have some visual separation in the panels.
+Sometimes when plotting facets, it helps to have some visual separation in the panels.
 The `add_facet_border()` function is a quick way to do so without adjusting `theme()` elements directly:
 
 ```{r example_add_facet_borders}
@@ -109,4 +126,5 @@ p + theme_td() +
   theme(legend.position = "none") +
   labs(subtitle = "Same font")
 ```
+
 

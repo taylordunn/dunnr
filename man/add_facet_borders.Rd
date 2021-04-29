@@ -13,15 +13,13 @@ add_facet_borders(color = "grey70", colour)
 This is a convenience function to add borders around panels and strips in
 ggplot2. All it does it modify the panel.border and strip.background theme
 elements to have the same specified color.
-}
-\details{
 Credit to the \code{cowplot} package back for the idea. I only added the extra
 strip.background border because I think it looks better.
 }
 \examples{
 library(ggplot2)
-library(palmerpenguins)
 library(dplyr)
+library(palmerpenguins)
 
 # Load the default font (Roboto Condensed)
 extrafont::loadfonts(quiet = TRUE)

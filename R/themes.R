@@ -1,8 +1,7 @@
-#' The default TD theme
+#' The default TD theme for `ggplot2`
 #'
 #' A simple plotting theme with a half-open frame and no gridlines.
 #' Heavily inspired by `cowplot::theme_half_open()`.
-#'
 #'
 #' @param base_size base font size in pts.
 #' @param base_family base font family.
@@ -35,7 +34,8 @@
 #' p + theme_td()
 #'
 #' @importFrom grid unit
-#' @importFrom ggplot2 theme theme_bw element_line element_rect element_text element_blank margin rel %+replace%
+#' @importFrom ggplot2 theme theme_bw element_line element_rect element_text
+#'   element_blank margin rel %+replace%
 theme_td <- function(base_size = 14, base_family = "Roboto Condensed",
                      base_line_size = base_size / 24) {
   half_line <- base_size / 2

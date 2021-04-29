@@ -6,9 +6,8 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of `dunnr` is to compile various helper functions and lists
-that I frequently use. Mostly, it has functions for plotting in
-`ggplot2`.
+The goal of `dunnr` is to compile various helper functions, templates,
+and lists that I frequently use.
 
 ## Installation
 
@@ -21,7 +20,7 @@ remotes::install_github("taylordunn/dunnr")
 
 ### Plotting functions
 
-My go-to theme can be applied with `theme_td()`:
+My go-to `ggplot2` theme can be applied with `theme_td()`:
 
 ``` r
 library(dunnr)
@@ -52,7 +51,7 @@ p1 <- penguins %>%
 p1 + theme_td()
 ```
 
-<img src="man/figures/README-example_theme_td-1.png" width="100%" />
+![](man/figures/README-example_theme_td-1.png)<!-- -->
 
 Note that the default font family here is Roboto Condensed, which can be
 downloaded from [Google
@@ -68,17 +67,36 @@ extrafont::loadfonts(device = "win")
 Alternatively, give another font as an argument,
 e.g. `theme_td(base_family = "Arial")`.
 
+### `remove_axis()`
+
+A common tweak I make to plots is to remove unnecessary axes. The
+`remove_axis()` function saves a few lines of code:
+
+``` r
+p <- penguins %>%
+  filter(!is.na(flipper_length_mm)) %>%
+  ggplot(aes(x = flipper_length_mm)) +
+  geom_density(aes(fill = species), alpha = 0.5) +
+  scale_fill_brewer(palette = "Set1") +
+  scale_y_continuous(expand = expansion(c(0, 0.1))) +
+  labs(x = "Flipper length (mm)")
+p + theme_td() +
+  remove_axis("y")
+```
+
+![](man/figures/README-example_remove_axis-1.png)<!-- -->
+
 ### `add_facet_border()`
 
-Sometimes when plotting facets like above, it helps to have some visual
-separation in the panels. The `add_facet_border()` function is a quick
-way to do so without adjusting `theme()` elements directly:
+Sometimes when plotting facets, it helps to have some visual separation
+in the panels. The `add_facet_border()` function is a quick way to do so
+without adjusting `theme()` elements directly:
 
 ``` r
 p1 + theme_td() + add_facet_borders()
 ```
 
-<img src="man/figures/README-example_add_facet_borders-1.png" width="100%" />
+![](man/figures/README-example_add_facet_borders-1.png)<!-- -->
 
 ### `set_geom_fonts()`
 
@@ -112,7 +130,7 @@ p + theme_td() +
   theme(legend.position = "none")
 ```
 
-<img src="man/figures/README-example_set_geom_fonts-1.png" width="100%" />
+![](man/figures/README-example_set_geom_fonts-1.png)<!-- -->
 
 ``` r
 # But if we set the theme
@@ -125,4 +143,4 @@ p + theme_td() +
   labs(subtitle = "Same font")
 ```
 
-<img src="man/figures/README-example_set_geom_fonts-2.png" width="100%" />
+![](man/figures/README-example_set_geom_fonts-2.png)<!-- -->

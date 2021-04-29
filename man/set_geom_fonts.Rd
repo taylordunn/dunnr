@@ -21,9 +21,9 @@ package.
 }
 \examples{
 library(ggplot2)
-library(palmerpenguins)
 library(dplyr)
 library(glue)
+library(palmerpenguins)
 
 # Load the default font (Roboto Condensed)
 extrafont::loadfonts(quiet = TRUE)

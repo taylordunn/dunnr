@@ -2,6 +2,7 @@
 
 export("%>%")
 export(add_facet_borders)
+export(remove_axis)
 export(set_geom_fonts)
 export(td_colors)
 export(td_fonts)

@@ -2,7 +2,7 @@
 % Please edit documentation in R/themes.R
 \name{theme_td}
 \alias{theme_td}
-\title{The default TD theme}
+\title{The default TD theme for \code{ggplot2}}
 \usage{
 theme_td(
   base_size = 14,
