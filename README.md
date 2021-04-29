@@ -59,7 +59,7 @@ extrafont::loadfonts(device = "win", quiet = TRUE)
 Alternatively, give another font as an argument,
 e.g. `theme_td(base_family = "Arial")`.
 
-## Palettes
+### Palettes
 
 ### `remove_axis()`
 

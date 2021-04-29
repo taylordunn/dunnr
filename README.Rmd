@@ -10,7 +10,7 @@ knitr::opts_chunk$set(
   comment = "#>",
   fig.path = "man/figures/README-",
   #out.width = "100%" # Stretching some figures out to 100% makes them look bad
-  fig.width = 8, fig.height = 4, dpi = 200
+  fig.width = 6, fig.height = 4, dpi = 300
 )
 extrafont::loadfonts(device = "win", quiet = TRUE)
 ```
@@ -66,7 +66,7 @@ extrafont::loadfonts(device = "win", quiet = TRUE)
 
 Alternatively, give another font as an argument, e.g. `theme_td(base_family = "Arial")`.
 
-## Palettes
+### Palettes
 
 ### `remove_axis()`
 
@@ -99,7 +99,7 @@ p1 + theme_td() + add_facet_borders()
 The `set_geom_fonts()` function sets the default fonts of `geom_text()` and `geom_label()`.
 If no font is specified, it will automatically take the font from the current `ggplot2` theme:
 
-```{r example_set_geom_fonts, fig.height=3, fig.width=4, message=F}
+```{r example_set_geom_fonts, fig.height=2, fig.width=3, message=F}
 library(glue)
 p <- penguins %>%
   count(species, island, name = "n_penguins") %>%
