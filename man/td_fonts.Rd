@@ -5,12 +5,12 @@
 \alias{td_fonts}
 \title{Fonts}
 \format{
-An object of class \code{list} of length 2.
+An object of class \code{list} of length 3.
 }
 \usage{
 td_fonts
 }
 \description{
-This list contains some nice serif and sans serif fonts.
+This list contains some nice serif, sans serif and monospace font families.
 }
 \keyword{datasets}

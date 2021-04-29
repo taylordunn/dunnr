@@ -4,13 +4,15 @@ output: github_document
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-```{r, include = FALSE}
+```{r, include=FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/README-",
   out.width = "100%"
 )
+
+extrafont::loadfonts(device = "win")
 ```
 
 # dunnr
@@ -18,43 +20,93 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of dunnr is to compile various helper functions and lists that I frequently use.
+The goal of `dunnr` is to compile various helper functions and lists that I frequently use.
+Mostly, it has functions for plotting in `ggplot2`.
 
 ## Installation
 
-You can install the released version of dunnr from [CRAN](https://CRAN.R-project.org) with:
-
 ``` r
-install.packages("dunnr")
+# install.packages("remotes")
+remotes::install_github("taylordunn/dunnr")
 ```
+## Examples
 
-And the development version from [GitHub](https://github.com/) with:
+### Plotting functions
 
-``` r
-# install.packages("devtools")
-devtools::install_github("taylordunn/dunnr")
-```
-## Example
+My go-to theme can be applied with `theme_td()`:
 
-This is a basic example which shows you how to solve a common problem:
-
-```{r example}
+```{r example_theme_td}
 library(dunnr)
-## basic example code
+library(ggplot2)
+library(dplyr)
+library(palmerpenguins)
+
+p1 <- penguins %>%
+  filter(!is.na(bill_length_mm)) %>%
+  ggplot(aes(x = bill_length_mm, y = bill_depth_mm, color = species)) +
+  geom_point(aes(shape = species), size = 3, alpha = 0.7) +
+  geom_smooth(method = "lm", formula = "y ~ x", se = FALSE) +
+  scale_color_brewer(palette = "Set1") +
+  labs(title = "Penguin bill dimensions",
+       subtitle = "Bill length and depth for different penguin species",
+       x = "Bill length (mm)", y = "Bill depth (mm)",
+       color = "Penguin species", shape = "Penguin species",
+       caption = "Data from the palmerpenguins package") +
+  facet_wrap(~species, nrow = 1)
+p1 + theme_td()
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
+Note that the default font family here is Roboto Condensed, which can be downloaded from [Google Fonts](https://fonts.google.com/specimen/Roboto+Condensed) (to save headaches on Windows, use the "Install for all users" option so that R can find the font easily).
+Then to import and load the font:
 
-```{r cars}
-summary(cars)
+```{r eval=F}
+extrafont::font_import(pattern = "Roboto", prompt = FALSE)
+extrafont::loadfonts(device = "win")
 ```
 
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this. You could also use GitHub Actions to re-render `README.Rmd` every time you push. An example workflow can be found here: <https://github.com/r-lib/actions/tree/master/examples>.
+Alternatively, give another font as an argument, e.g. `theme_td(base_family = "Arial")`.
 
-You can also embed plots, for example:
+### `add_facet_border()`
 
-```{r pressure, echo = FALSE}
-plot(pressure)
+Sometimes when plotting facets like above, it helps to have some visual separation in the panels.
+The `add_facet_border()` function is a quick way to do so without adjusting `theme()` elements directly:
+
+```{r example_add_facet_borders}
+p1 + theme_td() + add_facet_borders()
 ```
 
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.
+### `set_geom_fonts()`
+
+The `set_geom_fonts()` function sets the default fonts of `geom_text()` and `geom_label()`.
+If no font is specified, it will automatically take the font from the current `ggplot2` theme:
+
+```{r example_set_geom_fonts, fig.height=3, fig.width=6}
+library(glue)
+p <- penguins %>%
+  count(species, island, name = "n_penguins") %>%
+  ggplot(aes(y = species, x = n_penguins)) +
+  geom_col(aes(fill = island)) +
+  geom_label(aes(label = glue("{island}: n = {n_penguins}")),
+             position = "stack", hjust = 1) +
+  scale_fill_brewer(palette = "Set1") +
+  scale_x_continuous(expand = expansion(mult = c(0, 0.1))) +
+  labs(title = "Number of penguins per island",
+       subtitle = "Different font",
+       x = "Number of penguins", y = NULL,
+       caption = "Data from the palmerpenguins package") +
+  theme(legend.position = "none")
+
+# By default, geom_label() doesn't have the same font as theme_td()
+p + theme_td() +
+  theme(legend.position = "none")
+
+# But if we set the theme
+theme_set(theme_td())
+# And then set fonts with the helper function
+set_geom_fonts()
+
+p + theme_td() +
+  theme(legend.position = "none") +
+  labs(subtitle = "Same font")
+```
+
