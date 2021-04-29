@@ -10,7 +10,7 @@ knitr::opts_chunk$set(
   comment = "#>",
   fig.path = "man/figures/README-",
   #out.width = "100%" # Stretching some figures out to 100% makes them look bad
-  fig.width = 5, fig.height = 3, dpi = 200
+  fig.width = 4, fig.height = 3, dpi = 200
 )
 extrafont::loadfonts(device = "win", quiet = TRUE)
 ```
@@ -35,7 +35,7 @@ remotes::install_github("taylordunn/dunnr")
 
 My go-to `ggplot2` theme can be applied with `theme_td()`:
 
-```{r example_theme_td}
+```{r example_theme_td, message=FALSE}
 library(dunnr)
 library(ggplot2)
 library(dplyr)

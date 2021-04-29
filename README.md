@@ -26,14 +26,6 @@ My go-to `ggplot2` theme can be applied with `theme_td()`:
 library(dunnr)
 library(ggplot2)
 library(dplyr)
-#> 
-#> Attaching package: 'dplyr'
-#> The following objects are masked from 'package:stats':
-#> 
-#>     filter, lag
-#> The following objects are masked from 'package:base':
-#> 
-#>     intersect, setdiff, setequal, union
 library(palmerpenguins)
 
 p1 <- penguins %>%

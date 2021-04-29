@@ -36,7 +36,7 @@
 #' @importFrom grid unit
 #' @importFrom ggplot2 theme theme_bw element_line element_rect element_text
 #'   element_blank margin rel %+replace%
-theme_td <- function(base_size = 14, base_family = "Roboto Condensed",
+theme_td <- function(base_size = 12, base_family = "Roboto Condensed",
                      base_line_size = base_size / 24) {
   half_line <- base_size / 2
 
