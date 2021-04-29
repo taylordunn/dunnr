@@ -59,22 +59,71 @@ extrafont::loadfonts(device = "win", quiet = TRUE)
 Alternatively, give another font as an argument,
 e.g. `theme_td(base_family = "Arial")`.
 
-## Palettes
+### Palettes
+
+The `td_colors` list has some of my commonly used palettes, which can
+all be accessed via the `td_pal()` function. A qualitative palette with
+pastel colors:
+
+``` r
+scales::show_col(td_pal(palette = "pastel6")())
+```
+
+![](man/figures/README-pastel6_palette-1.png)<!-- -->
+
+A diverging blue-to-red palette:
+
+``` r
+scales::show_col(td_pal(palette = "div5")(), ncol = 5)
+```
+
+![](man/figures/README-div5_palette-1.png)<!-- -->
+
+These palettes can be easily applied to plots with the
+`scale_color_td()` and `scale_fill_td()` functions:
+
+``` r
+library(patchwork)
+p2 <- diamonds %>%
+  filter(carat >= 2.2) %>%
+  ggplot(aes(x = price, y = cut, fill = cut)) +
+  geom_boxplot() +
+  theme_td() +
+  theme(legend.position = "none") +
+  cowplot::background_grid(major = "x")
+(p2 + scale_fill_td() + labs(title = "pastel6")) +
+  (p2 + scale_fill_td("div5") + labs(title = "div5"))
+```
+
+![](man/figures/README-example_scale_fill_td-1.png)<!-- -->
+
+``` r
+p3 <- faithfuld %>%
+  ggplot(aes(waiting, eruptions, fill = density)) +
+  geom_tile() +
+  theme_td() +
+  scale_x_continuous(expand = c(0, 0)) +
+  scale_y_continuous(expand = c(0, 0))
+p3 +
+  scale_fill_td(palette = "div5", type = "continuous", reverse = FALSE)
+```
+
+![](man/figures/README-example_scale_color_td-1.png)<!-- -->
 
 ### `remove_axis()`
 
-A common tweak I make to plots is to remove unnecessary axes. The
-`remove_axis()` function saves a few lines of code:
+A common tweak I make to plots is to remove unnecessary axes, like in
+density plots. The `remove_axis()` function saves a few lines of code:
 
 ``` r
-p <- penguins %>%
+p4 <- penguins %>%
   filter(!is.na(flipper_length_mm)) %>%
   ggplot(aes(x = flipper_length_mm)) +
   geom_density(aes(fill = species), alpha = 0.5) +
   scale_fill_brewer(palette = "Set1") +
   scale_y_continuous(expand = expansion(c(0, 0.1))) +
   labs(x = "Flipper length (mm)")
-p + theme_td() +
+p4 + theme_td() +
   remove_axis("y")
 ```
 
@@ -100,7 +149,7 @@ the font from the current `ggplot2` theme:
 
 ``` r
 library(glue)
-p <- penguins %>%
+p5 <- penguins %>%
   count(species, island, name = "n_penguins") %>%
   ggplot(aes(y = species, x = n_penguins)) +
   geom_col(aes(fill = island)) +
@@ -115,7 +164,7 @@ p <- penguins %>%
   theme(legend.position = "none")
 
 # By default, geom_label() doesn't have the same font as theme_td()
-p + theme_td() +
+p5 + theme_td() +
   theme(legend.position = "none")
 ```
 
@@ -127,7 +176,7 @@ theme_set(theme_td())
 # And then set fonts with the helper function
 set_geom_fonts()
 
-p + theme_td() +
+p5 + theme_td() +
   theme(legend.position = "none") +
   labs(subtitle = "Same font")
 ```

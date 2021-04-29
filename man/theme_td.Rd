@@ -5,7 +5,7 @@
 \title{The default TD theme for \code{ggplot2}}
 \usage{
 theme_td(
-  base_size = 14,
+  base_size = 12,
   base_family = "Roboto Condensed",
   base_line_size = base_size/24
 )
