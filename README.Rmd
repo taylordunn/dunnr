@@ -4,16 +4,15 @@ output: github_document
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-```{r message=FALSE, include=FALSE}
+```{r setup, message=FALSE, include=FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/README-",
   #out.width = "100%" # Stretching some figures out to 100% makes them look bad
-  fig.width = 6, fig.height = 4, dpi = 200
+  fig.width = 5, fig.height = 3, dpi = 200
 )
-
-extrafont::loadfonts(device = "win")
+extrafont::loadfonts(device = "win", quiet = TRUE)
 ```
 
 # dunnr
@@ -29,9 +28,10 @@ The goal of `dunnr` is to compile various helper functions, templates, and lists
 # install.packages("remotes")
 remotes::install_github("taylordunn/dunnr")
 ```
-## Examples
 
-### Plotting functions
+## Plotting functions
+
+### Themes
 
 My go-to `ggplot2` theme can be applied with `theme_td()`:
 
@@ -61,10 +61,12 @@ Then to import and load the font:
 
 ```{r eval=F}
 extrafont::font_import(pattern = "Roboto", prompt = FALSE)
-extrafont::loadfonts(device = "win")
+extrafont::loadfonts(device = "win", quiet = TRUE)
 ```
 
 Alternatively, give another font as an argument, e.g. `theme_td(base_family = "Arial")`.
+
+### Palettes
 
 ### `remove_axis()`
 

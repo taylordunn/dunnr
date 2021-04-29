@@ -16,9 +16,9 @@ and lists that I frequently use.
 remotes::install_github("taylordunn/dunnr")
 ```
 
-## Examples
+## Plotting functions
 
-### Plotting functions
+### Themes
 
 My go-to `ggplot2` theme can be applied with `theme_td()`:
 
@@ -61,11 +61,13 @@ can find the font easily). Then to import and load the font:
 
 ``` r
 extrafont::font_import(pattern = "Roboto", prompt = FALSE)
-extrafont::loadfonts(device = "win")
+extrafont::loadfonts(device = "win", quiet = TRUE)
 ```
 
 Alternatively, give another font as an argument,
 e.g. `theme_td(base_family = "Arial")`.
+
+### Palettes
 
 ### `remove_axis()`
 
