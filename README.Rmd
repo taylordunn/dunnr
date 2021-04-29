@@ -99,7 +99,7 @@ p1 + theme_td() + add_facet_borders()
 The `set_geom_fonts()` function sets the default fonts of `geom_text()` and `geom_label()`.
 If no font is specified, it will automatically take the font from the current `ggplot2` theme:
 
-```{r example_set_geom_fonts, fig.height=3, fig.width=6}
+```{r example_set_geom_fonts, fig.height=3, fig.width=4, message=F}
 library(glue)
 p <- penguins %>%
   count(species, island, name = "n_penguins") %>%

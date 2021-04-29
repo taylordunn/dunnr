@@ -100,11 +100,6 @@ the font from the current `ggplot2` theme:
 
 ``` r
 library(glue)
-#> 
-#> Attaching package: 'glue'
-#> The following object is masked from 'package:dplyr':
-#> 
-#>     collapse
 p <- penguins %>%
   count(species, island, name = "n_penguins") %>%
   ggplot(aes(y = species, x = n_penguins)) +
