@@ -10,7 +10,7 @@ knitr::opts_chunk$set(
   comment = "#>",
   fig.path = "man/figures/README-",
   #out.width = "100%" # Stretching some figures out to 100% makes them look bad
-  fig.width = 4, fig.height = 3, dpi = 200
+  fig.width = 8, fig.height = 6, dpi = 200
 )
 extrafont::loadfonts(device = "win", quiet = TRUE)
 ```
@@ -44,7 +44,7 @@ library(palmerpenguins)
 p1 <- penguins %>%
   filter(!is.na(bill_length_mm)) %>%
   ggplot(aes(x = bill_length_mm, y = bill_depth_mm, color = species)) +
-  geom_point(aes(shape = species), size = 3, alpha = 0.7) +
+  geom_point(aes(shape = species), size = 3, alpha = 0.5) +
   geom_smooth(method = "lm", formula = "y ~ x", se = FALSE) +
   scale_color_brewer(palette = "Set1") +
   labs(title = "Penguin bill dimensions",

@@ -31,7 +31,7 @@ library(palmerpenguins)
 p1 <- penguins %>%
   filter(!is.na(bill_length_mm)) %>%
   ggplot(aes(x = bill_length_mm, y = bill_depth_mm, color = species)) +
-  geom_point(aes(shape = species), size = 3, alpha = 0.7) +
+  geom_point(aes(shape = species), size = 3, alpha = 0.5) +
   geom_smooth(method = "lm", formula = "y ~ x", se = FALSE) +
   scale_color_brewer(palette = "Set1") +
   labs(title = "Penguin bill dimensions",
