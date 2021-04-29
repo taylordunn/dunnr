@@ -66,14 +66,14 @@ extrafont::loadfonts(device = "win", quiet = TRUE)
 
 Alternatively, give another font as an argument, e.g. `theme_td(base_family = "Arial")`.
 
-### Palettes
+## Palettes
 
 ### `remove_axis()`
 
 A common tweak I make to plots is to remove unnecessary axes.
 The `remove_axis()` function saves a few lines of code:
 
-```{r example_remove_axis}
+```{r example_remove_axis, fig.height=3}
 p <- penguins %>%
   filter(!is.na(flipper_length_mm)) %>%
   ggplot(aes(x = flipper_length_mm)) +
@@ -99,7 +99,7 @@ p1 + theme_td() + add_facet_borders()
 The `set_geom_fonts()` function sets the default fonts of `geom_text()` and `geom_label()`.
 If no font is specified, it will automatically take the font from the current `ggplot2` theme:
 
-```{r example_set_geom_fonts, fig.height=2, fig.width=3, message=F}
+```{r example_set_geom_fonts, fig.height=3, message=F}
 library(glue)
 p <- penguins %>%
   count(species, island, name = "n_penguins") %>%
