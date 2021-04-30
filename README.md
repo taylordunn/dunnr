@@ -75,12 +75,12 @@ test <- scales::show_col(td_pal(palette = "pastel6")())
 A diverging blue-to-red palette:
 
 ``` r
-scales::show_col(td_pal(palette = "div5")())
+scales::show_col(td_pal(palette = "div5")(), cex_label = 0.5, ncol = 5)
 ```
 
 ![](man/figures/README-div5_palette-1.png)<!-- -->
 
-### Scales
+## Scales
 
 These palettes can be easily applied to plots with the
 `scale_color_td()` and `scale_fill_td()` functions:
