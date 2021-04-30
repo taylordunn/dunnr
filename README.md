@@ -80,6 +80,12 @@ scales::show_col(td_pal(palette = "div5")(), cex_label = 0.5, ncol = 5)
 
 ![](man/figures/README-div5_palette-1.png)<!-- -->
 
+``` r
+scales::show_col(td_pal(palette = "div5")(), cex_label = 0.4, ncol = 5)
+```
+
+![](man/figures/README-div5_palette2-1.png)<!-- -->
+
 ## Scales
 
 These palettes can be easily applied to plots with the
