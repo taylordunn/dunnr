@@ -27,5 +27,4 @@ show_col(td_pal("pastel6")(6))
 show_col(td_pal("pastel6", reverse = TRUE)(3))
 show_col(td_pal("div5")(5))
 show_col(td_pal("div5")(10))
-
 }

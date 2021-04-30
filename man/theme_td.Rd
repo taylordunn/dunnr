@@ -38,13 +38,14 @@ p <- penguins \%>\%
   geom_point(aes(shape = species), size = 3, alpha = 0.7) +
   geom_smooth(method = "lm", formula = "y ~ x", se = FALSE) +
   scale_color_brewer(palette = "Set1") +
-  labs(title = "Penguin bill dimensions",
-       subtitle = "Bill length and depth for different penguin species",
-       x = "Bill length (mm)", y = "Bill depth (mm)",
-       color = "Penguin species", shape = "Penguin species",
-       caption = "Data from the palmerpenguins package") +
+  labs(
+    title = "Penguin bill dimensions",
+    subtitle = "Bill length and depth for different penguin species",
+    x = "Bill length (mm)", y = "Bill depth (mm)",
+    color = "Penguin species", shape = "Penguin species",
+    caption = "Data from the palmerpenguins package"
+  ) +
   facet_wrap(~species, nrow = 1)
 
 p + theme_td()
-
 }

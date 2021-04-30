@@ -99,6 +99,5 @@ p <- faithfuld \%>\%
   scale_x_continuous(expand = c(0, 0)) +
   scale_y_continuous(expand = c(0, 0))
 p +
- scale_fill_td(palette = "div5", type = "continuous")
-
+  scale_fill_td(palette = "div5", type = "continuous")
 }
