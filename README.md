@@ -31,14 +31,15 @@ library(palmerpenguins)
 p1 <- penguins %>%
   filter(!is.na(bill_length_mm)) %>%
   ggplot(aes(x = bill_length_mm, y = bill_depth_mm, color = species)) +
-  geom_point(aes(shape = species), size = 3, alpha = 0.5) +
-  geom_smooth(method = "lm", formula = "y ~ x", se = FALSE) +
+  geom_point(aes(shape = species), size = 3, alpha = 0.5, show.legend = FALSE) +
+  geom_smooth(method = "lm", formula = "y ~ x",
+              se = FALSE, show.legend = FALSE) +
   scale_color_brewer(palette = "Set1") +
   labs(title = "Penguin bill dimensions",
        subtitle = "Bill length and depth for different penguin species",
        x = "Bill length (mm)", y = "Bill depth (mm)",
        color = "Penguin species", shape = "Penguin species",
-       caption = "Data from the palmerpenguins package") +
+       caption = "Data from the palmerpenguins package.") +
   facet_wrap(~species, nrow = 1)
 p1 + theme_td()
 ```
@@ -59,6 +60,33 @@ extrafont::loadfonts(device = "win", quiet = TRUE)
 Alternatively, give another font as an argument,
 e.g. `theme_td(base_family = "Arial")`.
 
+`theme_td_grid()` is based on `theme_bw()` with minor tweaks, such as
+slightly softer colors and Droid Serif as the default font:
+
+``` r
+p2 <- penguins %>%
+  filter(!is.na(flipper_length_mm)) %>%
+  ggplot(aes(x = flipper_length_mm, y = species)) +
+  geom_violin(aes(fill = species), show.legend = FALSE) +
+  labs(x = "Flipper length (mm)", y = NULL) +
+  facet_wrap(~year) +
+  scale_fill_brewer(palette = "Set1") +
+  scale_x_continuous(breaks = seq(180, 220, 20))
+p2 + theme_td_grid() +
+  theme(panel.grid.major.y = element_blank())
+```
+
+![](man/figures/README-example_theme_td_grid-1.png)<!-- -->
+
+`theme_td_grey()` is a low contrast theme that emphasizes title and
+facet text:
+
+``` r
+p1 + theme_td_grey()
+```
+
+![](man/figures/README-unnamed-chunk-2-1.png)<!-- -->
+
 ### Palettes
 
 The `td_colors` list has some of my commonly used palettes, which can
@@ -67,7 +95,6 @@ pastel colors:
 
 ``` r
 scales::show_col(td_pal(palette = "pastel6")())
-test <- scales::show_col(td_pal(palette = "pastel6")())
 ```
 
 ![](man/figures/README-pastel6_palette-1.png)<!-- -->
@@ -87,27 +114,27 @@ These palettes can be easily applied to plots with the
 
 ``` r
 library(patchwork)
-p2 <- diamonds %>%
+p3 <- diamonds %>%
   filter(carat >= 2.2) %>%
   ggplot(aes(x = price, y = cut, fill = cut)) +
   geom_boxplot() +
   theme_td() +
   theme(legend.position = "none") +
   cowplot::background_grid(major = "x")
-(p2 + scale_fill_td() + labs(title = "pastel6")) +
-  (p2 + scale_fill_td("div5") + labs(title = "div5"))
+(p3 + scale_fill_td() + labs(title = "pastel6")) +
+  (p3 + scale_fill_td("div5") + labs(title = "div5"))
 ```
 
 ![](man/figures/README-example_scale_fill_td-1.png)<!-- -->
 
 ``` r
-p3 <- faithfuld %>%
+p4 <- faithfuld %>%
   ggplot(aes(waiting, eruptions, fill = density)) +
   geom_tile() +
   theme_td() +
   scale_x_continuous(expand = c(0, 0)) +
   scale_y_continuous(expand = c(0, 0))
-p3 +
+p4 +
   scale_fill_td(palette = "div5", type = "continuous", reverse = FALSE)
 ```
 
@@ -119,14 +146,14 @@ A common tweak I make to plots is to remove unnecessary axes, like in
 density plots. The `remove_axis()` function saves a few lines of code:
 
 ``` r
-p4 <- penguins %>%
+p5 <- penguins %>%
   filter(!is.na(flipper_length_mm)) %>%
   ggplot(aes(x = flipper_length_mm)) +
   geom_density(aes(fill = species), alpha = 0.5) +
   scale_fill_brewer(palette = "Set1") +
   scale_y_continuous(expand = expansion(c(0, 0.1))) +
   labs(x = "Flipper length (mm)")
-p4 + theme_td() +
+p5 + theme_td() +
   remove_axis("y")
 ```
 
@@ -152,7 +179,7 @@ the font from the current `ggplot2` theme:
 
 ``` r
 library(glue)
-p5 <- penguins %>%
+p6 <- penguins %>%
   count(species, island, name = "n_penguins") %>%
   ggplot(aes(y = species, x = n_penguins)) +
   geom_col(aes(fill = island)) +
@@ -167,7 +194,7 @@ p5 <- penguins %>%
   theme(legend.position = "none")
 
 # By default, geom_label() doesn't have the same font as theme_td()
-p5 + theme_td() +
+p6 + theme_td() +
   theme(legend.position = "none")
 ```
 
@@ -179,7 +206,7 @@ theme_set(theme_td())
 # And then set fonts with the helper function
 set_geom_fonts()
 
-p5 + theme_td() +
+p6 + theme_td() +
   theme(legend.position = "none") +
   labs(subtitle = "Same font")
 ```

@@ -24,4 +24,5 @@ Imports:
     scales,
     palmerpenguins,
     ggrepel,
-    glue
+    glue,
+    colorspace
