@@ -71,15 +71,18 @@ Alternatively, give another font as an argument, e.g. `theme_td(base_family = "A
 The `td_colors` list has some of my commonly used palettes, which can all be accessed via the `td_pal()` function.
 A qualitative palette with pastel colors:
 
-```{r pastel6_palette}
+```{r pastel6_palette, fig.height=2.5}
 scales::show_col(td_pal(palette = "pastel6")())
+test <- scales::show_col(td_pal(palette = "pastel6")())
 ```
 
 A diverging blue-to-red palette:
 
-```{r div5_palette}
-scales::show_col(td_pal(palette = "div5")(), ncol = 5)
+```{r div5_palette, fig.height=2.5}
+scales::show_col(td_pal(palette = "div5")())
 ```
+
+### Scales
 
 These palettes can be easily applied to plots with the `scale_color_td()` and `scale_fill_td()` functions:
 
@@ -106,7 +109,6 @@ p3 <- faithfuld %>%
 p3 +
   scale_fill_td(palette = "div5", type = "continuous", reverse = FALSE)
 ```
-
 
 ### `remove_axis()`
 

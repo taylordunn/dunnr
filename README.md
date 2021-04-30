@@ -67,6 +67,7 @@ pastel colors:
 
 ``` r
 scales::show_col(td_pal(palette = "pastel6")())
+test <- scales::show_col(td_pal(palette = "pastel6")())
 ```
 
 ![](man/figures/README-pastel6_palette-1.png)<!-- -->
@@ -74,10 +75,12 @@ scales::show_col(td_pal(palette = "pastel6")())
 A diverging blue-to-red palette:
 
 ``` r
-scales::show_col(td_pal(palette = "div5")(), ncol = 5)
+scales::show_col(td_pal(palette = "div5")())
 ```
 
 ![](man/figures/README-div5_palette-1.png)<!-- -->
+
+### Scales
 
 These palettes can be easily applied to plots with the
 `scale_color_td()` and `scale_fill_td()` functions:
