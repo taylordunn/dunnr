@@ -21,7 +21,7 @@ td_colors <- list(
     spanish_blue = "#2d71ae",
     opera_mauve = "#c37ca6",
     ruby_red = "#8f2727",
-    indigo_blue ="#083d77",
+    indigo_blue = "#083d77",
     charcoal = "#2f4858",
     strong_red = "#d7191c",
     strong_blue = "#2b83ba",

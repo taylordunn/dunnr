@@ -25,14 +25,18 @@
 #'   count(species, island, name = "n_penguins") %>%
 #'   ggplot(aes(y = species, x = n_penguins)) +
 #'   geom_col(aes(fill = island)) +
-#'   geom_label(aes(label = glue("{island}: n = {n_penguins}")),
-#'              position = "stack", hjust = 1) +
+#'   geom_label(
+#'     aes(label = glue("{island}: n = {n_penguins}")),
+#'     position = "stack", hjust = 1
+#'   ) +
 #'   scale_fill_brewer(palette = "Set1") +
 #'   scale_x_continuous(expand = expansion(mult = c(0, 0.1))) +
-#'   labs(title = "Number of penguins per island",
-#'        subtitle = "Different font",
-#'        x = "Number of penguins", y = NULL,
-#'        caption = "Data from the palmerpenguins package") +
+#'   labs(
+#'     title = "Number of penguins per island",
+#'     subtitle = "Different font",
+#'     x = "Number of penguins", y = NULL,
+#'     caption = "Data from the palmerpenguins package"
+#'   ) +
 #'   theme(legend.position = "none")
 #'
 #' # Either set the font explicitly
@@ -42,12 +46,10 @@
 #' set_geom_fonts()
 #'
 #' p + theme_td()
-#'
 #' @importFrom ggplot2 update_geom_defaults theme_get
 #' @importFrom ggrepel GeomTextRepel GeomLabelRepel
 #' @importFrom glue glue
 set_geom_fonts <- function(family = NULL, ggrepel = FALSE) {
-
   if (is.null(family)) {
     family <- ggplot2::theme_get()$text$family
   }

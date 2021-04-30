@@ -17,7 +17,6 @@
 #' show_col(td_pal("pastel6", reverse = TRUE)(3))
 #' show_col(td_pal("div5")(5))
 #' show_col(td_pal("div5")(10))
-#'
 #' @importFrom grDevices colorRampPalette
 td_pal <- function(palette = "pastel6", type = "discrete", reverse = FALSE) {
   stopifnot(tolower(palette) %in% names(td_colors))
@@ -33,10 +32,12 @@ td_pal <- function(palette = "pastel6", type = "discrete", reverse = FALSE) {
       if (n > length(pal)) {
         warning(paste("This pallete has only ", length(pal), " colors."))
       }
-      if (reverse) rev(pal[1:n])
-      else pal[1:n]
+      if (reverse) {
+        rev(pal[1:n])
+      } else {
+        pal[1:n]
+      }
     }
-
   } else if (type == "continuous") {
     if (reverse) pal <- rev(pal)
     grDevices::colorRampPalette(pal)
@@ -74,8 +75,7 @@ td_pal <- function(palette = "pastel6", type = "discrete", reverse = FALSE) {
 #'   scale_x_continuous(expand = c(0, 0)) +
 #'   scale_y_continuous(expand = c(0, 0))
 #' p +
-#'  scale_fill_td(palette = "div5", type = "continuous")
-#'
+#'   scale_fill_td(palette = "div5", type = "continuous")
 #' @rdname scale_color_td
 #' @inheritDotParams ggplot2::discrete_scale
 #' @aliases scale_colour_td
@@ -85,8 +85,10 @@ scale_color_td <- function(palette = "pastel6", type = "discrete",
   pal <- td_pal(palette = palette, type = type, reverse = reverse)
 
   if (type == "discrete") {
-    ggplot2::discrete_scale("color", scale_name = paste("td_pal: ", palette),
-                            palette = pal, ...)
+    ggplot2::discrete_scale("color",
+      scale_name = paste("td_pal: ", palette),
+      palette = pal, ...
+    )
   } else {
     ggplot2::scale_color_gradientn(colors = pal(256), ...)
   }
@@ -97,12 +99,14 @@ scale_color_td <- function(palette = "pastel6", type = "discrete",
 #'
 #' @importFrom ggplot2 discrete_scale scale_color_gradientn
 scale_fill_td <- function(palette = "pastel6", type = "discrete",
-                           reverse = FALSE, ...) {
+                          reverse = FALSE, ...) {
   pal <- td_pal(palette = palette, type = type, reverse = reverse)
 
   if (type == "discrete") {
-    ggplot2::discrete_scale("fill", scale_name = paste("td_pal: ", palette),
-                            palette = pal, ...)
+    ggplot2::discrete_scale("fill",
+      scale_name = paste("td_pal: ", palette),
+      palette = pal, ...
+    )
   } else {
     ggplot2::scale_fill_gradientn(colors = pal(256), ...)
   }

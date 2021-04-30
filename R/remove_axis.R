@@ -22,7 +22,6 @@
 #'   labs(x = "Flipper length (mm)")
 #' p + theme_td() +
 #'   remove_axis("y")
-#'
 remove_axis <- function(axis = "y") {
   if (axis == "y") {
     theme(
