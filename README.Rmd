@@ -9,7 +9,7 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/README-",
-  #out.width = "100%" # Stretching some figures out to 100% makes them look bad
+  out.width = "100%", # Stretching some figures out to 100% makes them look bad
   fig.width = 6, fig.height = 4, dpi = 300
 )
 extrafont::loadfonts(device = "win", quiet = TRUE)
@@ -100,11 +100,11 @@ scales::show_col(td_pal(palette = "pastel6")())
 
 A diverging blue-to-red palette:
 
-```{r div5_palette, fig.height=2}
+```{r div5_palette, fig.height=2.5}
 scales::show_col(td_pal(palette = "div5")())
 ```
 
-## Scales
+### Scales
 
 These palettes can be easily applied to plots with the `scale_color_td()` and `scale_fill_td()` functions:
 
@@ -112,7 +112,7 @@ These palettes can be easily applied to plots with the `scale_color_td()` and `s
 library(patchwork)
 p3 <- diamonds %>%
   filter(carat >= 2.2) %>%
-  ggplot(aes(x = price, y = cut, fill = cut)) +
+  ggplot(aes(x = price, y = cut, fill = factor(cut, ordered = FALSE))) +
   geom_boxplot() +
   theme_td() +
   theme(legend.position = "none") +
@@ -193,4 +193,75 @@ p6 + theme_td() +
   labs(subtitle = "Same font")
 ```
 
+### TBD: `set_color_palette()`
 
+I have plans to write a convenience function that will set the default `ggplot2` color and fill scales.
+It will look something like this:
+
+```{r}
+set_color_palette <- function(discrete_pal = "pastel6",
+                              continuous_pal = "div5") {
+  options(
+    ggplot2.discrete.fill = function() {
+      scale_fill_td(palette = discrete_pal, type = "discrete")
+    }
+  )
+  options(
+    ggplot2.discrete.color = function() {
+      scale_color_td(palette = discrete_pal, type = "discrete")
+    }
+  )
+  options(
+    ggplot2.continuous.fill = function() {
+      scale_fill_td(palette = continuous_pal, type = "continuous")
+    }
+  )
+  options(
+    ggplot2.continuous.color = function() {
+      scale_color_td(palette = continuous_pal, type = "continuous")
+    }
+  )
+}
+set_color_palette()
+```
+
+It works with discrete fills:
+
+```{r}
+p3
+```
+
+It works with continuous fills:
+
+```{r}
+p4
+```
+
+But fails with discrete colors:
+
+```{r error=TRUE, message=TRUE}
+p <- penguins %>%
+  filter(!is.na(bill_length_mm)) %>%
+  ggplot(aes(x = bill_length_mm, y = bill_depth_mm, color = species)) +
+  geom_point(aes(shape = species), size = 3, alpha = 0.5, show.legend = FALSE) +
+  geom_smooth(method = "lm", formula = "y ~ x",
+              se = FALSE, show.legend = FALSE) +
+  labs(title = "Penguin bill dimensions",
+       subtitle = "Bill length and depth for different penguin species",
+       x = "Bill length (mm)", y = "Bill depth (mm)",
+       color = "Penguin species", shape = "Penguin species",
+       caption = "Data from the palmerpenguins package.") +
+  facet_wrap(~species, nrow = 1)
+p
+```
+
+For some reason, the `ggplot2.discrete.color` option doesn't like scale functions.
+It will, however, work with just a list of the colors:
+
+```{r error=TRUE}
+withr::with_options(
+  list(ggplot2.discrete.color = td_colors$pastel6),
+  print(p)
+)
+```
+It may have something to do with [issue #4149 of ggplot2](https://github.com/tidyverse/ggplot2/issues/4149).

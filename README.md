@@ -44,7 +44,7 @@ p1 <- penguins %>%
 p1 + theme_td()
 ```
 
-![](man/figures/README-example_theme_td-1.png)<!-- -->
+<img src="man/figures/README-example_theme_td-1.png" width="100%" />
 
 Note that the default font family here is Roboto Condensed, which can be
 downloaded from [Google
@@ -76,7 +76,7 @@ p2 + theme_td_grid() +
   theme(panel.grid.major.y = element_blank())
 ```
 
-![](man/figures/README-example_theme_td_grid-1.png)<!-- -->
+<img src="man/figures/README-example_theme_td_grid-1.png" width="100%" />
 
 `theme_td_grey()` is a low contrast theme that emphasizes title and
 facet text:
@@ -85,7 +85,7 @@ facet text:
 p1 + theme_td_grey()
 ```
 
-![](man/figures/README-unnamed-chunk-2-1.png)<!-- -->
+<img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" />
 
 ### Palettes
 
@@ -97,7 +97,7 @@ pastel colors:
 scales::show_col(td_pal(palette = "pastel6")())
 ```
 
-![](man/figures/README-pastel6_palette-1.png)<!-- -->
+<img src="man/figures/README-pastel6_palette-1.png" width="100%" />
 
 A diverging blue-to-red palette:
 
@@ -105,9 +105,9 @@ A diverging blue-to-red palette:
 scales::show_col(td_pal(palette = "div5")())
 ```
 
-![](man/figures/README-div5_palette-1.png)<!-- -->
+<img src="man/figures/README-div5_palette-1.png" width="100%" />
 
-## Scales
+### Scales
 
 These palettes can be easily applied to plots with the
 `scale_color_td()` and `scale_fill_td()` functions:
@@ -116,7 +116,7 @@ These palettes can be easily applied to plots with the
 library(patchwork)
 p3 <- diamonds %>%
   filter(carat >= 2.2) %>%
-  ggplot(aes(x = price, y = cut, fill = cut)) +
+  ggplot(aes(x = price, y = cut, fill = factor(cut, ordered = FALSE))) +
   geom_boxplot() +
   theme_td() +
   theme(legend.position = "none") +
@@ -125,7 +125,7 @@ p3 <- diamonds %>%
   (p3 + scale_fill_td("div5") + labs(title = "div5"))
 ```
 
-![](man/figures/README-example_scale_fill_td-1.png)<!-- -->
+<img src="man/figures/README-example_scale_fill_td-1.png" width="100%" />
 
 ``` r
 p4 <- faithfuld %>%
@@ -138,7 +138,7 @@ p4 +
   scale_fill_td(palette = "div5", type = "continuous", reverse = FALSE)
 ```
 
-![](man/figures/README-example_scale_color_td-1.png)<!-- -->
+<img src="man/figures/README-example_scale_color_td-1.png" width="100%" />
 
 ### `remove_axis()`
 
@@ -157,7 +157,7 @@ p5 + theme_td() +
   remove_axis("y")
 ```
 
-![](man/figures/README-example_remove_axis-1.png)<!-- -->
+<img src="man/figures/README-example_remove_axis-1.png" width="100%" />
 
 ### `add_facet_border()`
 
@@ -169,7 +169,7 @@ without adjusting `theme()` elements directly:
 p1 + theme_td() + add_facet_borders()
 ```
 
-![](man/figures/README-example_add_facet_borders-1.png)<!-- -->
+<img src="man/figures/README-example_add_facet_borders-1.png" width="100%" />
 
 ### `set_geom_fonts()`
 
@@ -198,7 +198,7 @@ p6 + theme_td() +
   theme(legend.position = "none")
 ```
 
-![](man/figures/README-example_set_geom_fonts-1.png)<!-- -->
+<img src="man/figures/README-example_set_geom_fonts-1.png" width="100%" />
 
 ``` r
 # But if we set the theme
@@ -211,4 +211,92 @@ p6 + theme_td() +
   labs(subtitle = "Same font")
 ```
 
-![](man/figures/README-example_set_geom_fonts-2.png)<!-- -->
+<img src="man/figures/README-example_set_geom_fonts-2.png" width="100%" />
+
+### TBD: `set_color_palette()`
+
+I have plans to write a convenience function that will set the default
+`ggplot2` color and fill scales. It will look something like this:
+
+``` r
+set_color_palette <- function(discrete_pal = "pastel6",
+                              continuous_pal = "div5") {
+  options(
+    ggplot2.discrete.fill = function() {
+      scale_fill_td(palette = discrete_pal, type = "discrete")
+    }
+  )
+  options(
+    ggplot2.discrete.color = function() {
+      scale_color_td(palette = discrete_pal, type = "discrete")
+    }
+  )
+  options(
+    ggplot2.continuous.fill = function() {
+      scale_fill_td(palette = continuous_pal, type = "continuous")
+    }
+  )
+  options(
+    ggplot2.continuous.color = function() {
+      scale_color_td(palette = continuous_pal, type = "continuous")
+    }
+  )
+}
+set_color_palette()
+```
+
+It works with discrete fills:
+
+``` r
+p3
+```
+
+<img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
+
+It works with continuous fills:
+
+``` r
+p4
+```
+
+<img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
+
+But fails with discrete colors:
+
+``` r
+p <- penguins %>%
+  filter(!is.na(bill_length_mm)) %>%
+  ggplot(aes(x = bill_length_mm, y = bill_depth_mm, color = species)) +
+  geom_point(aes(shape = species), size = 3, alpha = 0.5, show.legend = FALSE) +
+  geom_smooth(method = "lm", formula = "y ~ x",
+              se = FALSE, show.legend = FALSE) +
+  labs(title = "Penguin bill dimensions",
+       subtitle = "Bill length and depth for different penguin species",
+       x = "Bill length (mm)", y = "Bill depth (mm)",
+       color = "Penguin species", shape = "Penguin species",
+       caption = "Data from the palmerpenguins package.") +
+  facet_wrap(~species, nrow = 1)
+p
+#> Scale for 'fill' is already present. Adding another scale for 'fill', which
+#> will replace the existing scale.
+#> Error: Unknown colour name: Adelie
+```
+
+<img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" />
+
+For some reason, the `ggplot2.discrete.color` option doesn’t like scale
+functions. It will, however, work with just a list of the colors:
+
+``` r
+withr::with_options(
+  list(ggplot2.discrete.color = td_colors$pastel6),
+  print(p)
+)
+#> Scale for 'fill' is already present. Adding another scale for 'fill', which
+#> will replace the existing scale.
+#> Error: Unknown colour name: Adelie
+```
+
+<img src="man/figures/README-unnamed-chunk-7-1.png" width="100%" /> It
+may have something to do with [issue \#4149 of
+ggplot2](https://github.com/tidyverse/ggplot2/issues/4149).
