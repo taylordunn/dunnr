@@ -82,10 +82,10 @@ p2 + theme_td_grid() +
 facet text:
 
 ``` r
-p1 + theme_td_grey()
+p1 + theme_td_grey(base_size = 12)
 ```
 
-<img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" />
+<img src="man/figures/README-example_theme_td_grey-1.png" width="100%" />
 
 ### Palettes
 
@@ -213,90 +213,17 @@ p6 + theme_td() +
 
 <img src="man/figures/README-example_set_geom_fonts-2.png" width="100%" />
 
-### TBD: `set_color_palette()`
+### `set_palette()`
 
-I have plans to write a convenience function that will set the default
-`ggplot2` color and fill scales. It will look something like this:
-
-``` r
-set_color_palette <- function(discrete_pal = "pastel6",
-                              continuous_pal = "div5") {
-  options(
-    ggplot2.discrete.fill = function() {
-      scale_fill_td(palette = discrete_pal, type = "discrete")
-    }
-  )
-  options(
-    ggplot2.discrete.color = function() {
-      scale_color_td(palette = discrete_pal, type = "discrete")
-    }
-  )
-  options(
-    ggplot2.continuous.fill = function() {
-      scale_fill_td(palette = continuous_pal, type = "continuous")
-    }
-  )
-  options(
-    ggplot2.continuous.color = function() {
-      scale_color_td(palette = continuous_pal, type = "continuous")
-    }
-  )
-}
-set_color_palette()
-```
-
-It works with discrete fills:
+The `set_palette()` function is a convenience way to quickly set the
+default discrete palette (via `ggplot2.discrete.fill` and
+`ggplot2.continuous.fill` options) and the default continuous palette
+(via `ggplot2.continuous.fill` and `ggplot2.continuous.colour`):
 
 ``` r
-p3
+set_palette()
+(p3 + labs(title = "Discrete palette")) +
+  (p4 + labs(title = "Continuous palette"))
 ```
 
-<img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
-
-It works with continuous fills:
-
-``` r
-p4
-```
-
-<img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
-
-But fails with discrete colors:
-
-``` r
-p <- penguins %>%
-  filter(!is.na(bill_length_mm)) %>%
-  ggplot(aes(x = bill_length_mm, y = bill_depth_mm, color = species)) +
-  geom_point(aes(shape = species), size = 3, alpha = 0.5, show.legend = FALSE) +
-  geom_smooth(method = "lm", formula = "y ~ x",
-              se = FALSE, show.legend = FALSE) +
-  labs(title = "Penguin bill dimensions",
-       subtitle = "Bill length and depth for different penguin species",
-       x = "Bill length (mm)", y = "Bill depth (mm)",
-       color = "Penguin species", shape = "Penguin species",
-       caption = "Data from the palmerpenguins package.") +
-  facet_wrap(~species, nrow = 1)
-p
-#> Scale for 'fill' is already present. Adding another scale for 'fill', which
-#> will replace the existing scale.
-#> Error: Unknown colour name: Adelie
-```
-
-<img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" />
-
-For some reason, the `ggplot2.discrete.color` option doesn’t like scale
-functions. It will, however, work with just a list of the colors:
-
-``` r
-withr::with_options(
-  list(ggplot2.discrete.color = td_colors$pastel6),
-  print(p)
-)
-#> Scale for 'fill' is already present. Adding another scale for 'fill', which
-#> will replace the existing scale.
-#> Error: Unknown colour name: Adelie
-```
-
-<img src="man/figures/README-unnamed-chunk-7-1.png" width="100%" /> It
-may have something to do with [issue \#4149 of
-ggplot2](https://github.com/tidyverse/ggplot2/issues/4149).
+<img src="man/figures/README-example_set_palette-1.png" width="100%" />

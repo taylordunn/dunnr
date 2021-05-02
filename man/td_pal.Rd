@@ -13,7 +13,7 @@ td_pal(palette = "pastel6", type = "discrete", reverse = FALSE)
 \item "div5"
 }}
 
-\item{type}{One of "discrete" (default) or "continuous"}
+\item{type}{One of "discrete" (default) or "continuous".}
 
 \item{reverse}{Boolean to reverse palette order.}
 }

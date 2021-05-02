@@ -6,7 +6,7 @@
 #' @param palette Character name of palette:
 #'   - "pastel6" (default)
 #'   - "div5"
-#' @param type One of "discrete" (default) or "continuous"
+#' @param type One of "discrete" (default) or "continuous".
 #' @param reverse Boolean to reverse palette order.
 #'
 #' @export
@@ -52,9 +52,9 @@ td_pal <- function(palette = "pastel6", type = "discrete", reverse = FALSE) {
 #' @param palette Character name of palette:
 #'   - "pastel6" (default)
 #'   - "div5"
-#' @param type One of "discrete" (default) or "continuous"
+#' @param type One of "discrete" (default) or "continuous".
 #' @param reverse Boolean to reverse palette order.
-#' @param ...
+#' @param ... Additional parameters passed on to the scale type.
 #'
 #' @export
 #'
@@ -110,4 +110,60 @@ scale_fill_td <- function(palette = "pastel6", type = "discrete",
   } else {
     ggplot2::scale_fill_gradientn(colors = pal(256), ...)
   }
+}
+
+#' Sets the default ggplot2 palettes
+#'
+#' This function sets the global `ggplot2` options for discrete
+#' (`ggplot2.discrete.fill` and `ggplot2.discrete.colour`) and continuous
+#' (`ggplot2.continuous.fill` and `ggplot2.continuous.colour`) palettes to
+#' specified palettes from the `dunnr` package.
+#' Use `help(scale_colour_discrete)` to see how these options work.
+#'
+#' @param discrete_pal One of the palettes from [td_pal()].
+#' @param continuous_pal One of the palettes from [td_pal()].
+#'
+#' @export
+#'
+#' @examples
+#' # Sets pastel6 for discrete and div5 for continuous as the default palettes
+#' set_palette()
+#'
+#' library(ggplot2)
+#' library(dplyr)
+#'
+#' p <- diamonds %>%
+#'   filter(carat >= 2.2) %>%
+#'   ggplot(aes(x = price, y = cut, fill = cut)) +
+#'   geom_boxplot() +
+#'   theme(legend.position = "none")
+#' p
+#'
+#' p <- faithfuld %>%
+#'   ggplot(aes(waiting, eruptions, fill = density)) +
+#'   geom_tile() +
+#'   scale_x_continuous(expand = c(0, 0)) +
+#'   scale_y_continuous(expand = c(0, 0))
+#' p
+set_palette <- function(discrete_pal = "pastel6", continuous_pal = "div5") {
+  options(
+    ggplot2.discrete.fill = function() {
+      scale_fill_td(palette = discrete_pal, type = "discrete")
+    }
+  )
+  options(
+    ggplot2.discrete.colour = function() {
+      scale_color_td(palette = discrete_pal, type = "discrete")
+    }
+  )
+  options(
+    ggplot2.continuous.fill = function() {
+      scale_fill_td(palette = continuous_pal, type = "continuous")
+    }
+  )
+  options(
+    ggplot2.continuous.colour = function() {
+      scale_color_td(palette = continuous_pal, type = "continuous")
+    }
+  )
 }
