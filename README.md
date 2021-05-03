@@ -215,7 +215,7 @@ p6 + theme_td() +
 
 ### `set_palette()`
 
-The `set_palette()` function is a convenience way to quickly set the
+The `set_palette()` function is a convenient way to quickly set the
 default discrete palette (via `ggplot2.discrete.fill` and
 `ggplot2.continuous.fill` options) and the default continuous palette
 (via `ggplot2.continuous.fill` and `ggplot2.continuous.colour`):

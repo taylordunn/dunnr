@@ -1,6 +1,6 @@
 Package: dunnr
-Title: TD's Helper Functions
-Version: 0.1
+Title: Personal R Package of Taylor Dunn
+Version: 0.2.0
 Authors@R: 
     person(given = "Taylor",
            family = "Dunn",

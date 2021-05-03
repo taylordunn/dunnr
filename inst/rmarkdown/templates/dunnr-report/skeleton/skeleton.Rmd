@@ -1,0 +1,79 @@
+---
+title: "Title"
+author: "Author"
+date: "`r format(Sys.time(), '%Y-%m-%d')`"
+output:
+  html_document:
+    code_folding: hide
+    df_print: paged
+    toc: TRUE
+    toc_float: TRUE
+    theme: paper
+    highlight: zenburn
+#bibliography: references.bib
+---
+<style>
+body .main-container {
+  max-width: 1500px !important;
+}
+</style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  fig.width = 6, fig.height = 4, dpi = 150
+)
+```
+
+```{r packages, include=FALSE}
+library(tidyverse)
+library(here)
+```
+
+```{r dunnr, include=FALSE}
+library(dunnr)
+
+# This command must be run once to register all fonts installed on Windows
+# extrafont::font_import()
+# This command must be run once in each R session to register fonts
+extrafont::loadfonts(device = "win", quiet = TRUE)
+
+theme_set(theme_td())
+set_geom_fonts()
+set_palette()
+```
+
+
+```{r}
+ggplot(iris, aes(Sepal.Length, fill = Species)) +
+  geom_density(alpha = 0.5) +
+  scale_y_continuous(expand = expansion(c(0, 0.1))) +
+  labs(title = "Example plot",
+       subtitle = "theme_td with pastel6 palette") +
+  theme(legend.position = c(0.7, 0.7)) +
+  remove_axis()
+```
+
+# Reproducibility
+
+<details><summary>Reproducibility receipt</summary>
+
+```{r}
+Sys.time()
+```
+
+```{r}
+if ("git2r" %in% installed.packages()) {
+  if (git2r::in_repository()) {
+    git2r::repository()
+  }
+}
+```
+
+```{r}
+sessioninfo::session_info()
+```
+
+</details>
+
+<!-- # References -->

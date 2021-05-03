@@ -1,0 +1,4 @@
+name: dunnr RMarkdown Template (HTML)
+description: >
+   Taylor Dunn's RMarkdown template for routine data analysis
+create_dir: FALSE

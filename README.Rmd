@@ -104,6 +104,7 @@ A diverging blue-to-red palette:
 scales::show_col(td_pal(palette = "div5")())
 ```
 
+
 ### Scales
 
 These palettes can be easily applied to plots with the `scale_color_td()` and `scale_fill_td()` functions:
@@ -195,7 +196,7 @@ p6 + theme_td() +
 
 ### `set_palette()`
 
-The `set_palette()` function is a convenience way to quickly set the default discrete palette (via `ggplot2.discrete.fill` and `ggplot2.continuous.fill` options) and the default continuous palette (via `ggplot2.continuous.fill` and `ggplot2.continuous.colour`):
+The `set_palette()` function is a convenient way to quickly set the default discrete palette (via `ggplot2.discrete.fill` and `ggplot2.continuous.fill` options) and the default continuous palette (via `ggplot2.continuous.fill` and `ggplot2.continuous.colour`):
 
 ```{r example_set_palette}
 set_palette()
