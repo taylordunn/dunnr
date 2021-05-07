@@ -34,7 +34,7 @@ library(here)
 library(dunnr)
 
 # This command must be run once to register all fonts installed on Windows
-# extrafont::font_import()
+# extrafont::font_import(pattern = "Roboto")
 # This command must be run once in each R session to register fonts
 extrafont::loadfonts(device = "win", quiet = TRUE)
 
