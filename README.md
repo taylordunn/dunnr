@@ -16,6 +16,17 @@ and lists that I frequently use.
 remotes::install_github("taylordunn/dunnr")
 ```
 
+When installing to a project using `renv`, may have pass the
+`--no-multiarch` option as follows:
+
+``` r
+remotes::install_github("taylordunn/dunnr", INSTALL_opts = c("--no-multiarch"))
+```
+
+This has something to do with `renv` checking for multiple architectures
+when building packages, see [this
+issue](https://github.com/rstudio/renv/issues/162).
+
 ## Plotting functions
 
 ### Themes
