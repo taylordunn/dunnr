@@ -6,5 +6,5 @@
 td_fonts <- list(
   serif = c("Droid Serif", "Lora"),
   sans = c("Roboto Condensed", "Inter", "Lato", "IBM Plex Sans"),
-  mono = c("Fira Code")
+  mono = c("Fira Code", "Fira Mono")
 )
