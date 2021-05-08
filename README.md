@@ -27,6 +27,13 @@ This has something to do with `renv` checking for multiple architectures
 when building packages, see [this
 issue](https://github.com/rstudio/renv/issues/162).
 
+In order to link the cache of `dunnr` within an `renv` project, use the
+following code:
+
+``` r
+renv::install("taylordunn/dunnr")
+```
+
 ## Plotting functions
 
 ### Themes
