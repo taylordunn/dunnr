@@ -15,7 +15,7 @@ td_pal(palette = "pastel6", type = "discrete", reverse = FALSE)
 
 \item{type}{One of "discrete" (default) or "continuous".}
 
-\item{reverse}{Boolean to reverse palette order.}
+\item{reverse}{Logical to reverse palette order.}
 }
 \description{
 Returns a function for a discrete TD color palette, or for interpolating a
@@ -23,8 +23,9 @@ continuous one via \code{grDevices::colorRampPalette()}.
 }
 \examples{
 library(scales)
+show_col(td_pal()())
 show_col(td_pal("pastel6")(6))
 show_col(td_pal("pastel6", reverse = TRUE)(3))
 show_col(td_pal("div5")(5))
-show_col(td_pal("div5")(10))
+show_col(td_pal("div5", type = "continuous")(10))
 }

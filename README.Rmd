@@ -9,7 +9,7 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/README-",
-  out.width = "100%", # Stretching some figures out to 100% makes them look bad
+  out.width = "100%",
   fig.width = 6, fig.height = 4, dpi = 300
 )
 extrafont::loadfonts(device = "win", quiet = TRUE)
@@ -118,7 +118,6 @@ A diverging blue-to-red palette:
 scales::show_col(td_pal(palette = "div5")())
 ```
 
-
 ### Scales
 
 These palettes can be easily applied to plots with the `scale_color_td()` and `scale_fill_td()` functions:
@@ -134,9 +133,7 @@ p3 <- diamonds %>%
   cowplot::background_grid(major = "x")
 (p3 + scale_fill_td() + labs(title = "pastel6")) +
   (p3 + scale_fill_td("div5") + labs(title = "div5"))
-```
 
-```{r example_scale_color_td}
 p4 <- faithfuld %>%
   ggplot(aes(waiting, eruptions, fill = density)) +
   geom_tile() +

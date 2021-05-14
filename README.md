@@ -156,7 +156,7 @@ p4 +
   scale_fill_td(palette = "div5", type = "continuous", reverse = FALSE)
 ```
 
-<img src="man/figures/README-example_scale_color_td-1.png" width="100%" />
+<img src="man/figures/README-example_scale_fill_td-2.png" width="100%" />
 
 ### `remove_axis()`
 

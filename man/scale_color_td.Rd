@@ -19,7 +19,7 @@ scale_fill_td(palette = "pastel6", type = "discrete", reverse = FALSE, ...)
 
 \item{type}{One of "discrete" (default) or "continuous".}
 
-\item{reverse}{Boolean to reverse palette order.}
+\item{reverse}{Logical to reverse palette order.}
 
 \item{...}{
   Arguments passed on to \code{\link[ggplot2:discrete_scale]{ggplot2::discrete_scale}}

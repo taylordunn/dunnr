@@ -7,16 +7,17 @@
 #'   - "pastel6" (default)
 #'   - "div5"
 #' @param type One of "discrete" (default) or "continuous".
-#' @param reverse Boolean to reverse palette order.
+#' @param reverse Logical to reverse palette order.
 #'
 #' @export
 #'
 #' @examples
 #' library(scales)
+#' show_col(td_pal()())
 #' show_col(td_pal("pastel6")(6))
 #' show_col(td_pal("pastel6", reverse = TRUE)(3))
 #' show_col(td_pal("div5")(5))
-#' show_col(td_pal("div5")(10))
+#' show_col(td_pal("div5", type = "continuous")(10))
 #' @importFrom grDevices colorRampPalette
 td_pal <- function(palette = "pastel6", type = "discrete", reverse = FALSE) {
   stopifnot(tolower(palette) %in% names(td_colors))
@@ -30,7 +31,7 @@ td_pal <- function(palette = "pastel6", type = "discrete", reverse = FALSE) {
       if (is.null(n)) n <- length(pal)
 
       if (n > length(pal)) {
-        warning(paste("This pallete has only ", length(pal), " colors."))
+        warning(paste0("This pallete has only ", length(pal), " colors."))
       }
       if (reverse) {
         rev(pal[1:n])
@@ -53,7 +54,7 @@ td_pal <- function(palette = "pastel6", type = "discrete", reverse = FALSE) {
 #'   - "pastel6" (default)
 #'   - "div5"
 #' @param type One of "discrete" (default) or "continuous".
-#' @param reverse Boolean to reverse palette order.
+#' @param reverse Logical to reverse palette order.
 #' @param ... Additional parameters passed on to the scale type.
 #'
 #' @export
@@ -86,7 +87,7 @@ scale_color_td <- function(palette = "pastel6", type = "discrete",
 
   if (type == "discrete") {
     ggplot2::discrete_scale("color",
-      scale_name = paste("td_pal: ", palette),
+      scale_name = paste("td_pal:", palette),
       palette = pal, ...
     )
   } else {
@@ -97,14 +98,14 @@ scale_color_td <- function(palette = "pastel6", type = "discrete",
 #' @rdname scale_color_td
 #' @export
 #'
-#' @importFrom ggplot2 discrete_scale scale_color_gradientn
+#' @importFrom ggplot2 discrete_scale scale_fill_gradientn
 scale_fill_td <- function(palette = "pastel6", type = "discrete",
                           reverse = FALSE, ...) {
   pal <- td_pal(palette = palette, type = type, reverse = reverse)
 
   if (type == "discrete") {
     ggplot2::discrete_scale("fill",
-      scale_name = paste("td_pal: ", palette),
+      scale_name = paste("td_pal:", palette),
       palette = pal, ...
     )
   } else {
