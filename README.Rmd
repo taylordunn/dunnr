@@ -79,6 +79,10 @@ extrafont::font_import(pattern = "Roboto", prompt = FALSE)
 extrafont::loadfonts(device = "win", quiet = TRUE)
 ```
 
+Update 2021-08-05: I had some issues importing fonts with `extrafont`, where it would say "No FontName. Skipping" for every font.
+It turns out this has to do with the `Rttf2pt1` package, which can be fixed be installing an older version.
+See [this GitHub issue](https://github.com/wch/extrafont/issues/88).
+
 Alternatively, give another font as an argument, e.g. `theme_td(base_family = "Arial")`.
 
 `theme_td_grid()` is based on `theme_bw()` with minor tweaks, such as slightly softer colors and Droid Serif as the default font:
