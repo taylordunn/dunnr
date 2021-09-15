@@ -2,6 +2,7 @@
 
 export("%>%")
 export(add_facet_borders)
+export(get_distill_source)
 export(remove_axis)
 export(scale_color_td)
 export(scale_fill_td)
@@ -33,4 +34,5 @@ importFrom(ggrepel,GeomTextRepel)
 importFrom(glue,glue)
 importFrom(grDevices,colorRampPalette)
 importFrom(grid,unit)
+importFrom(htmltools,a)
 importFrom(magrittr,"%>%")

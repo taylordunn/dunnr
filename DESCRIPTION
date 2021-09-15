@@ -1,6 +1,6 @@
 Package: dunnr
 Title: Personal R Package of Taylor Dunn
-Version: 0.2.0
+Version: 0.2.1
 Authors@R: 
     person(given = "Taylor",
            family = "Dunn",
@@ -25,7 +25,8 @@ Imports:
     palmerpenguins,
     ggrepel,
     glue,
-    colorspace
+    colorspace,
+    htmltools
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
