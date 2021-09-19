@@ -75,7 +75,7 @@ get_distill_source <- function(repo = "taylordunn/tdunn", branch = "main",
 create_post_tdunn <- function(..., open = TRUE) {
   tmp <- distill::create_post(..., edit = FALSE)
 
-  yaml <- readLines(tmp, n = 12)
+  yaml <- readLines(tmp, n = 13)
 
   con <- file(tmp, open = "w")
 
@@ -83,20 +83,42 @@ create_post_tdunn <- function(..., open = TRUE) {
 
   body <- '
 
-    ```{r setup, include=TRUE}
-    knitr::opts_chunk$set(echo = TRUE)
-    library(tidyverse)
-    library(tidytuesdayR)
-    library(lubridate)
-    library(gt)
-    library(dunnr)
-    extrafont::loadfonts(device = "win", quiet = TRUE)
-    theme_set(theme_td())
-    set_geom_fonts()
-    set_palette()
-    ```
+```{r setup, include=TRUE, code_folding="Setup"}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(dunnr)
 
-    '
+extrafont::loadfonts(device = "win", quiet = TRUE)
+theme_set(theme_td())
+set_geom_fonts()
+set_palette()
+```
+
+# Reproducibility {.appendix}
+
+<details><summary>Session info</summary>
+
+```{r echo=FALSE}
+devtools::session_info()$platform
+devtools::session_info()$packages %>%
+  rmarkdown::paged_table()
+```
+
+</details>
+
+<details><summary>Git repository</summary>
+
+```{r echo=FALSE}
+git2r::repository()
+```
+
+</details>
+
+```{r echo=FALSE}
+get_distill_source(date = params$date, slug = params$slug)
+```
+
+'
 
   xfun::write_utf8(yaml, con)
   xfun::write_utf8(body, con)
