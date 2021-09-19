@@ -49,3 +49,58 @@ get_distill_source <- function(repo = "taylordunn/tdunn", branch = "main",
     post_url
   }
 }
+
+#' Create a new post with the tdunn.ca template
+#'
+#' This function wraps [distill::create_post()] to create a template post for my
+#' website https://tdunn.ca.
+#'
+#' Credit goes to Erik Ekholm:
+#' EE (2021, April 5). Eric Ekholm: Personalizing the Distill Template.
+#' Retrieved from
+#' https://www.ericekholm.com/posts/2021-04-02-personalizing-the-distill-template/
+#'
+#' @param ... Arguments passed to [distill::create_post()].
+#' @param open Logcal. If `TRUE` (default), opens the created file.
+#'
+#' @export
+#'
+#' @examples
+#' create_post_tdunn("Post title", date = Sys.Date(), date_prefix = TRUE,
+#'                   draft = TRUE, open = FALSE)
+#' @inheritDotParams distill::create_post
+#' @importFrom distill create_post
+#' @importFrom xfun write_utf8
+#' @importFrom usethis edit_file
+create_post_tdunn <- function(..., open = TRUE) {
+  tmp <- distill::create_post(..., edit = FALSE)
+
+  yaml <- readLines(tmp, n = 12)
+
+  con <- file(tmp, open = "w")
+
+  on.exit(close(con), add = TRUE)
+
+  body <- '
+
+    ```{r setup, include=TRUE}
+    knitr::opts_chunk$set(echo = TRUE)
+    library(tidyverse)
+    library(tidytuesdayR)
+    library(lubridate)
+    library(gt)
+    library(dunnr)
+    extrafont::loadfonts(device = "win", quiet = TRUE)
+    theme_set(theme_td())
+    set_geom_fonts()
+    set_palette()
+    ```
+
+    '
+
+  xfun::write_utf8(yaml, con)
+  xfun::write_utf8(body, con)
+
+  if (open == TRUE) usethis::edit_file(tmp)
+
+}
