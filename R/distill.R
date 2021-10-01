@@ -66,8 +66,10 @@ get_distill_source <- function(repo = "taylordunn/tdunn", branch = "main",
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' create_post_tdunn("Post title", date = Sys.Date(), date_prefix = TRUE,
 #'                   draft = TRUE, open = FALSE)
+#' }
 #' @inheritDotParams distill::create_post
 #' @importFrom distill create_post
 #' @importFrom xfun write_utf8
