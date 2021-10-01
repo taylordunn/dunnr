@@ -203,7 +203,7 @@ theme_td <- function(base_size = 12, base_family = "Roboto Condensed",
 #' @importFrom grid unit
 #' @importFrom ggplot2 theme theme_bw element_line element_rect element_text
 #'   element_blank margin rel %+replace%
-theme_td_grid <- function(base_size = 14, base_family = "Droid Serif",
+theme_td_grid <- function(base_size = 12, base_family = "Droid Serif",
                           base_line_size = base_size / 24) {
   half_line <- base_size / 2
 
@@ -374,7 +374,7 @@ theme_td_grid <- function(base_size = 14, base_family = "Droid Serif",
 #' @importFrom ggplot2 theme theme_bw element_line element_rect element_text
 #'   element_blank margin rel %+replace%
 #' @importFrom colorspace darken
-theme_td_grey <- function(base_size = 14, base_family = "Inter",
+theme_td_grey <- function(base_size = 12, base_family = "Inter",
                           base_line_size = base_size / 24, base_grey = "grey92") {
   half_line <- base_size / 2
 

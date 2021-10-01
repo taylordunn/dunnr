@@ -5,7 +5,7 @@
 \title{Add the grid theme from dunnr to a ggplot}
 \usage{
 theme_td_grid(
-  base_size = 14,
+  base_size = 12,
   base_family = "Droid Serif",
   base_line_size = base_size/24
 )

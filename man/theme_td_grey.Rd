@@ -5,7 +5,7 @@
 \title{Add the grey theme from dunnr to a ggplot}
 \usage{
 theme_td_grey(
-  base_size = 14,
+  base_size = 12,
   base_family = "Inter",
   base_line_size = base_size/24,
   base_grey = "grey92"
