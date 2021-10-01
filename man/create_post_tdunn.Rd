@@ -35,6 +35,8 @@ Retrieved from
 https://www.ericekholm.com/posts/2021-04-02-personalizing-the-distill-template/
 }
 \examples{
+\dontrun{
 create_post_tdunn("Post title", date = Sys.Date(), date_prefix = TRUE,
                   draft = TRUE, open = FALSE)
+}
 }
