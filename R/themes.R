@@ -342,6 +342,8 @@ theme_td_grid <- function(base_size = 12, base_family = "Droid Serif",
 #' @param base_family base font family.
 #' @param base_line_size base size for line elements.
 #' @param base_grey the specific grey to use throughout, default "grey92".
+#' @param gridlines Specifies the axes upon which to draw white gridlines:
+#'  "xy", "x", "y", or "none" (default).
 #'
 #' @return The complete theme.
 #' @export
@@ -375,7 +377,8 @@ theme_td_grid <- function(base_size = 12, base_family = "Droid Serif",
 #'   element_blank margin rel %+replace%
 #' @importFrom colorspace darken
 theme_td_grey <- function(base_size = 12, base_family = "Inter",
-                          base_line_size = base_size / 24, base_grey = "grey92") {
+                          base_line_size = base_size / 24, base_grey = "grey92",
+                          gridlines = "none") {
   half_line <- base_size / 2
 
   th <-
@@ -502,4 +505,17 @@ theme_td_grey <- function(base_size = 12, base_family = "Inter",
       plot.margin = margin(half_line, half_line, half_line, half_line),
       complete = TRUE
     )
+
+  if (gridlines == "xy") {
+    th <- th +
+      theme(panel.grid.major = element_line(color = "white"))
+  } else if (gridlines == "x") {
+    th <- th +
+      theme(panel.grid.major.x = element_line(color = "white"))
+  } else if (gridlines == "y") {
+    th <- th +
+      theme(panel.grid.major.y = element_line(color = "white"))
+  }
+
+  return(th)
 }

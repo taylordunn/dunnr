@@ -8,7 +8,8 @@ theme_td_grey(
   base_size = 12,
   base_family = "Inter",
   base_line_size = base_size/24,
-  base_grey = "grey92"
+  base_grey = "grey92",
+  gridlines = "none"
 )
 }
 \arguments{
@@ -19,6 +20,9 @@ theme_td_grey(
 \item{base_line_size}{base size for line elements.}
 
 \item{base_grey}{the specific grey to use throughout, default "grey92".}
+
+\item{gridlines}{Specifies the axes upon which to draw white gridlines:
+"xy", "x", "y", or "none" (default).}
 }
 \value{
 The complete theme.
