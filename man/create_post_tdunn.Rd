@@ -22,7 +22,7 @@ within the filesystem). Pass \code{NULL} for no date prefix.}
     \item{\code{edit}}{Open the post in an editor after creating it.}
   }}
 
-\item{open}{Logcal. If \code{TRUE} (default), opens the created file.}
+\item{open}{Logical. If \code{TRUE} (default), opens the created file.}
 }
 \description{
 This function wraps \code{\link[distill:create_post]{distill::create_post()}} to create a template post for my

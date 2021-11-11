@@ -61,7 +61,7 @@ get_distill_source <- function(repo = "taylordunn/tdunn", branch = "main",
 #' https://www.ericekholm.com/posts/2021-04-02-personalizing-the-distill-template/
 #'
 #' @param ... Arguments passed to [distill::create_post()].
-#' @param open Logcal. If `TRUE` (default), opens the created file.
+#' @param open Logical. If `TRUE` (default), opens the created file.
 #'
 #' @export
 #'
@@ -74,10 +74,27 @@ get_distill_source <- function(repo = "taylordunn/tdunn", branch = "main",
 #' @importFrom distill create_post
 #' @importFrom xfun write_utf8
 #' @importFrom usethis edit_file
+#' @importFrom utils tail
 create_post_tdunn <- function(..., open = TRUE) {
   tmp <- distill::create_post(..., edit = FALSE)
 
   yaml <- readLines(tmp, n = 13)
+  # Slight edits to the default YAML
+  output_idx <- grep("output:", yaml)
+  yaml_edit <-
+    c(yaml[c(1:6, 8)],
+      # Add params
+      c("params:", paste0("  ", yaml[8]), "  slug: "),
+      # Add placeholder categories
+      c("categories:", "  - category 1", "  - category 2"),
+      # Output arguments
+      c(yaml[output_idx:(output_idx + 2)], "    toc: true"),
+      # Include draft argument if it exists
+      yaml[grepl("draft:", yaml)],
+      # Optional bibliography
+      "bibliography: references.bib",
+      tail(yaml, 1)
+    )
 
   con <- file(tmp, open = "w")
 
@@ -122,7 +139,7 @@ get_distill_source(date = params$date, slug = params$slug)
 
 '
 
-  xfun::write_utf8(yaml, con)
+  xfun::write_utf8(yaml_edit, con)
   xfun::write_utf8(body, con)
 
   if (open == TRUE) usethis::edit_file(tmp)
