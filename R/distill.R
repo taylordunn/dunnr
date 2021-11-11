@@ -74,13 +74,13 @@ get_distill_source <- function(repo = "taylordunn/tdunn", branch = "main",
 #' @importFrom distill create_post
 #' @importFrom xfun write_utf8
 #' @importFrom usethis edit_file
-#' @importFrom utils tail
 create_post_tdunn <- function(..., open = TRUE) {
   tmp <- distill::create_post(..., edit = FALSE)
 
   yaml <- readLines(tmp, n = 13)
   # Slight edits to the default YAML
-  output_idx <- grep("output:", yaml)
+  output_idx <- grep("output:", yaml) # Index of output
+  end_idx <- grep("---", yaml)[2] # Index of the end of the YAML block
   yaml_edit <-
     c(yaml[c(1:6, 8)],
       # Add params
@@ -92,8 +92,8 @@ create_post_tdunn <- function(..., open = TRUE) {
       # Include draft argument if it exists
       yaml[grepl("draft:", yaml)],
       # Optional bibliography
-      "bibliography: references.bib",
-      tail(yaml, 1)
+      "#bibliography: references.bib",
+      yaml[end_idx], ""
     )
 
   con <- file(tmp, open = "w")
