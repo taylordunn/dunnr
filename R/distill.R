@@ -93,7 +93,7 @@ create_post_tdunn <- function(..., open = TRUE) {
       yaml[grepl("draft:", yaml)],
       # Optional bibliography
       "#bibliography: references.bib",
-      yaml[end_idx], ""
+      yaml[end_idx]
     )
 
   con <- file(tmp, open = "w")
@@ -136,7 +136,6 @@ git2r::repository()
 ```{r echo=FALSE}
 get_distill_source(date = params$date, slug = params$slug)
 ```
-
 '
 
   xfun::write_utf8(yaml_edit, con)
