@@ -96,7 +96,7 @@ set_geom_fonts()
 set_palette()
 ```
 
-# Reproducibility {.appendix}
+## Reproducibility {.appendix}
 
 <details><summary>Session info</summary>
 
