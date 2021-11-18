@@ -1,9 +1,14 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# dunnr
+# dunnr <img src='man/figures/logo.png' align="right" height="139" />
 
 <!-- badges: start -->
+
+[![Lifecycle:
+stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/dunnr)](https://CRAN.R-project.org/package=dunnr)
 <!-- badges: end -->
 
 The goal of `dunnr` is to compile various helper functions, templates,

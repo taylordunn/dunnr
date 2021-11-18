@@ -4,3 +4,4 @@
 ^README\.Rmd$
 workflow.txt
 ideas.txt
+^R/create-hex-sticker\.R$
