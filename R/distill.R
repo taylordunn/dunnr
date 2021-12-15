@@ -134,7 +134,7 @@ git2r::repository()
 </details>
 
 ```{r echo=FALSE}
-get_distill_source(date = params$date, slug = params$slug)
+dunnr::get_distill_source(date = params$date, slug = params$slug)
 ```
 '
 

@@ -244,3 +244,7 @@ create_post_tdunn("Post title", date = Sys.Date(), date_prefix = TRUE,
 ```
 
 
+## Todo
+
+* Number formatting:
+    * `round()` but keep training zeroes via `sprintf()`
