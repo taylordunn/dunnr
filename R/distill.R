@@ -105,8 +105,8 @@ create_post_tdunn <- function(..., open = TRUE) {
 ```{r setup, include=TRUE, code_folding="Setup"}
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
-library(dunnr)
 
+library(dunnr)
 extrafont::loadfonts(device = "win", quiet = TRUE)
 theme_set(theme_td())
 set_geom_fonts()
