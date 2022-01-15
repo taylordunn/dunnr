@@ -116,6 +116,14 @@ p1 + theme_td_grey(base_size = 12)
 
 <img src="man/figures/README-example_theme_td_grey-1.png" width="100%" />
 
+`theme_td_minimal()` is based on `theme_minimal()`:
+
+``` r
+p1 + theme_td_minimal()
+```
+
+<img src="man/figures/README-example_theme_td_minimal-1.png" width="100%" />
+
 ### Palettes
 
 The `td_colors` list has some of my commonly used palettes, which can
@@ -287,3 +295,8 @@ There is also a function `create_post_tdunn()`, which wraps
 create_post_tdunn("Post title", date = Sys.Date(), date_prefix = TRUE,
                   draft = TRUE, open = FALSE)
 ```
+
+## Todo
+
+-   Number formatting:
+    -   `round()` but keep training zeroes via `sprintf()`

@@ -519,3 +519,57 @@ theme_td_grey <- function(base_size = 12, base_family = "Inter",
 
   return(th)
 }
+
+#' Add the minimal theme from dunnr to a ggplot
+#'
+#' A plotting theme based off of [ggplot2::theme_minimal()] and inspired by
+#' [Andrew Heiss](https://www.andrewheiss.com/blog/).
+#' It uses Roboto Condensed as the default font, which may be changed with
+#' the `base_family` argument.
+#'
+#' @param base_size base font size in pts.
+#' @param base_family base font family.
+#' @param base_line_size base size for line elements.
+#' @param base_grey the specific grey to use for gridlines, default "greyw85".
+#'
+#' @return The complete theme.
+#' @export
+#'
+#' @examples
+#' library(ggplot2)
+#' library(palmerpenguins)
+#' library(dplyr)
+#'
+#' # Load the default font (Roboto Condensed)
+#' extrafont::loadfonts(quiet = TRUE)
+#'
+#' p <- penguins %>%
+#'   filter(!is.na(bill_length_mm)) %>%
+#'   ggplot(aes(x = bill_length_mm, y = bill_depth_mm, color = species)) +
+#'   geom_point(aes(shape = species), size = 3, alpha = 0.7) +
+#'   geom_smooth(method = "lm", formula = "y ~ x", se = FALSE) +
+#'   scale_color_brewer(palette = "Set1") +
+#'   labs(
+#'     title = "Penguin bill dimensions",
+#'     subtitle = "Bill length and depth for different penguin species",
+#'     x = "Bill length (mm)", y = "Bill depth (mm)",
+#'     color = "Penguin species", shape = "Penguin species",
+#'     caption = "Data from the palmerpenguins package"
+#'   ) +
+#'   facet_wrap(~species, nrow = 1)
+#'
+#' p + theme_td_minimal()
+#' @importFrom ggplot2 theme theme_minimal element_rect element_text
+#'   element_blank rel
+theme_td_minimal <- function(base_size = 12, base_family = "Roboto Condensed",
+                             base_grey = "grey85") {
+  theme_minimal(base_size = base_size, base_family = base_family) +
+    theme(
+      panel.grid.minor = element_blank(),
+      plot.title = element_text(face = "bold"),
+      axis.title = element_text(face = "bold"),
+      strip.text = element_text(face = "bold", size = rel(0.8), hjust = 0),
+      strip.background = element_rect(fill = base_grey, color = NA),
+      legend.title = element_text(face = "bold")
+    )
+}

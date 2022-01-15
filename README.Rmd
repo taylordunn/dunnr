@@ -108,6 +108,11 @@ p2 + theme_td_grid() +
 p1 + theme_td_grey(base_size = 12)
 ```
 
+`theme_td_minimal()` is based on `theme_minimal()`:
+
+```{r example_theme_td_minimal}
+p1 + theme_td_minimal()
+```
 
 ### Palettes
 
