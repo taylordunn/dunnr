@@ -234,10 +234,10 @@ There are a couple utility functions for working with the `distill` package and 
 
 ```{r}
 # By default, returns a HTML tag
-get_distill_source(date = "2021-05-18", slug = "tidytuesday-week-21",
+get_distill_source(date = "2021-05-18", slug = "tidytuesday-2021-week-21",
                    html_label = "Link to source code")
 # Alternatively, just get the URL
-get_distill_source(date = "2021-05-18", slug = "tidytuesday-week-21",
+get_distill_source(date = "2021-05-18", slug = "tidytuesday-2021-week-21",
                    html_tag = FALSE)
 ```
 

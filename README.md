@@ -275,17 +275,17 @@ posts:
 
 ``` r
 # By default, returns a HTML tag
-get_distill_source(date = "2021-05-18", slug = "tidytuesday-week-21",
+get_distill_source(date = "2021-05-18", slug = "tidytuesday-2021-week-21",
                    html_label = "Link to source code")
 ```
 
-<a href="https://github.com/taylordunn/tdunn/tree/main/_posts/2021-05-18-tidytuesday-week-21">Link to source code</a>
+<a href="https://github.com/taylordunn/tdunn/tree/main/_posts/2021-05-18-tidytuesday-2021-week-21">Link to source code</a>
 
 ``` r
 # Alternatively, just get the URL
-get_distill_source(date = "2021-05-18", slug = "tidytuesday-week-21",
+get_distill_source(date = "2021-05-18", slug = "tidytuesday-2021-week-21",
                    html_tag = FALSE)
-#> [1] "https://github.com/taylordunn/tdunn/tree/main/_posts/2021-05-18-tidytuesday-week-21"
+#> [1] "https://github.com/taylordunn/tdunn/tree/main/_posts/2021-05-18-tidytuesday-2021-week-21"
 ```
 
 There is also a function `create_post_tdunn()`, which wraps
