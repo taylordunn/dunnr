@@ -12,7 +12,7 @@ status](https://www.r-pkg.org/badges/version/dunnr)](https://CRAN.R-project.org/
 <!-- badges: end -->
 
 The goal of `dunnr` is to compile various helper functions, templates,
-and lists that I frequently use.
+and colors that I frequently use.
 
 ## Installation
 
@@ -255,7 +255,7 @@ p6 + theme_td() +
 The `set_palette()` function is a convenient way to quickly set the
 default discrete palette (via `ggplot2.discrete.fill` and
 `ggplot2.continuous.fill` options) and the default continuous palette
-(via `ggplot2.continuous.fill` and `ggplot2.continuous.colour`):
+(via `ggplot2.continuous.fill` and `ggplot2.continuous.color`):
 
 ``` r
 set_palette()
@@ -299,4 +299,4 @@ create_post_tdunn("Post title", date = Sys.Date(), date_prefix = TRUE,
 ## Todo
 
 -   Number formatting:
-    -   `round()` but keep training zeroes via `sprintf()`
+    -   `round()` but keep trailing zeroes via `sprintf()`
