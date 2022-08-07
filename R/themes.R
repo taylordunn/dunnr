@@ -529,7 +529,6 @@ theme_td_grey <- function(base_size = 12, base_family = "Inter",
 #'
 #' @param base_size base font size in pts.
 #' @param base_family base font family.
-#' @param base_line_size base size for line elements.
 #' @param base_grey the specific grey to use for gridlines, default "greyw85".
 #'
 #' @return The complete theme.
@@ -563,7 +562,7 @@ theme_td_grey <- function(base_size = 12, base_family = "Inter",
 #'   element_blank rel
 theme_td_minimal <- function(base_size = 12, base_family = "Roboto Condensed",
                              base_grey = "grey85") {
-  theme_minimal(base_size = base_size, base_family = base_family) +
+  ggplot2::theme_minimal(base_size = base_size, base_family = base_family) +
     theme(
       panel.grid.minor = element_blank(),
       plot.title = element_text(face = "bold"),

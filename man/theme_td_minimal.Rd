@@ -7,8 +7,7 @@
 theme_td_minimal(
   base_size = 12,
   base_family = "Roboto Condensed",
-  base_line_size = base_size/24,
-  base_grey = "grey92"
+  base_grey = "grey85"
 )
 }
 \arguments{
@@ -16,16 +15,15 @@ theme_td_minimal(
 
 \item{base_family}{base font family.}
 
-\item{base_line_size}{base size for line elements.}
-
-\item{base_grey}{the specific grey to use for gridlines, default "grey92".}
+\item{base_grey}{the specific grey to use for gridlines, default "greyw85".}
 }
 \value{
 The complete theme.
 }
 \description{
-A plotting theme based off of \code{\link[ggplot2:ggtheme]{ggplot2::theme_minimal()}}.
-It uses Roboto Condensed #' as the default font, which may be changed with
+A plotting theme based off of \code{\link[ggplot2:ggtheme]{ggplot2::theme_minimal()}} and inspired by
+\href{https://www.andrewheiss.com/blog/}{Andrew Heiss}.
+It uses Roboto Condensed as the default font, which may be changed with
 the \code{base_family} argument.
 }
 \examples{

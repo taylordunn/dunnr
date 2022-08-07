@@ -165,6 +165,7 @@ p3 <- diamonds %>%
 <img src="man/figures/README-example_scale_fill_td-1.png" width="100%" />
 
 ``` r
+
 p4 <- faithfuld %>%
   ggplot(aes(waiting, eruptions, fill = density)) +
   geom_tile() +
@@ -238,6 +239,7 @@ p6 + theme_td() +
 <img src="man/figures/README-example_set_geom_fonts-1.png" width="100%" />
 
 ``` r
+
 # But if we set the theme
 theme_set(theme_td())
 # And then set fonts with the helper function
@@ -265,27 +267,24 @@ set_palette()
 
 <img src="man/figures/README-example_set_palette-1.png" width="100%" />
 
-## Distill
+## Personal website
 
-There are a couple utility functions for working with the `distill`
-package and my website <https://tdunn.ca/>.
+There are a couple utility functions for working with my website
+<https://tdunn.ca/>, which was previously built with `distill` but
+recently converted to `quarto`.
 
-`get_distill_source()` generates a URL linking to the source code of
-posts:
+`get_quarto_source()` and `get_distill_source()` generate URLs linking
+to the source code and `renv.lock` files of my posts:
 
 ``` r
 # By default, returns a HTML tag
-get_distill_source(date = "2021-05-18", slug = "tidytuesday-2021-week-21",
+get_quarto_source(date = "2021-05-18", slug = "tidytuesday-2021-week-21",
                    html_label = "Link to source code")
-```
-
-<a href="https://github.com/taylordunn/tdunn/tree/main/_posts/2021-05-18-tidytuesday-2021-week-21">Link to source code</a>
-
-``` r
+#> [1] "<a href=\"https://github.com/taylordunn/tdunn-quarto/tree/main/posts/2021-05-18-tidytuesday-2021-week-21\">Link to source code</a>, <a href=\"https://github.com/taylordunn/tdunn-quarto/tree/main/posts/2021-05-18-tidytuesday-2021-week-21/renv.lock\">R environment</a>"
 # Alternatively, just get the URL
-get_distill_source(date = "2021-05-18", slug = "tidytuesday-2021-week-21",
-                   html_tag = FALSE)
-#> [1] "https://github.com/taylordunn/tdunn/tree/main/_posts/2021-05-18-tidytuesday-2021-week-21"
+get_quarto_source(date = "2021-05-18", slug = "tidytuesday-2021-week-21",
+                   html_tag = FALSE, renv_link = FALSE)
+#> [1] "https://github.com/taylordunn/tdunn-quarto/tree/main/posts/2021-05-18-tidytuesday-2021-week-21"
 ```
 
 There is also a function `create_post_tdunn()`, which wraps
@@ -298,5 +297,7 @@ create_post_tdunn("Post title", date = Sys.Date(), date_prefix = TRUE,
 
 ## Todo
 
+-   A `create_post_quarto()` for my new site that mimics
+    `create_post_tdunn()`
 -   Number formatting:
     -   `round()` but keep trailing zeroes via `sprintf()`

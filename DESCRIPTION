@@ -1,6 +1,6 @@
 Package: dunnr
 Title: Personal R Package of Taylor Dunn
-Version: 0.2.5
+Version: 0.2.6
 Authors@R: 
     person(given = "Taylor",
            family = "Dunn",
@@ -13,16 +13,12 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.1
 URL: https://github.com/taylordunn/dunnr
 BugReports: https://github.com/taylordunn/dunnr/issues
 Imports: 
-    dplyr,
     ggplot2,
     magrittr,
-    extrafont,
-    scales,
-    palmerpenguins,
     ggrepel,
     glue,
     colorspace,
@@ -30,6 +26,10 @@ Imports:
     distill,
     xfun,
     usethis
-Suggests: 
+Suggests:
+    dplyr,
+    extrafont,
+    palmerpenguins,
+    scales,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
